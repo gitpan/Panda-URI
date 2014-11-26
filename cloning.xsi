@@ -1,0 +1,24 @@
+MODULE = Panda::URI                PACKAGE = Panda::URI
+PROTOTYPES: DISABLE
+
+URI* URI::CLONE () {
+    HV* CLASS = SvSTASH(SvRV(ST(0)));
+    if (dynamic_cast<URI::Strict*>(THIS)) RETVAL = URI::create(*THIS);
+    else                                  RETVAL = new URI(*THIS);
+}
+
+string URI::STORABLE_freeze (bool cloning) {
+    RETVAL = THIS->to_string();
+    if (dynamic_cast<URI::Strict*>(THIS)) RETVAL += '1';
+    else RETVAL += '0';
+}
+
+URI* STORABLE_attach (const char* CLASS, bool cloning, SV* serialized) {
+    STRLEN len;
+    char* p = SvPV(serialized, len);
+    len--;
+    char ctrl = p[len];
+    p[len] = 0;
+    if (ctrl == '1') RETVAL = URI::create(string(p, len));
+    else             RETVAL = new URI(string(p, len));
+}

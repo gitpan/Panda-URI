@@ -1,0 +1,34 @@
+TYPEMAP
+
+URI* XT_PANDA_URI
+
+URIx*          XT_PANDA_URI_STRICT_AUTO
+URI::UserPass* XT_PANDA_URI_STRICT
+URI::httpX*    XT_PANDA_URI_STRICT
+URI::http*     XT_PANDA_URI_STRICT
+URI::https*    XT_PANDA_URI_STRICT
+URI::ftp*      XT_PANDA_URI_STRICT
+
+######################################################################
+OUTPUT
+
+XT_PANDA_XSURI : T_OEXT(basetype=XSURI*)
+
+XT_PANDA_URI : XT_PANDA_XSURI(nocast=1)
+    $var = ($type)new XSURI($var);
+
+XT_PANDA_URI_STRICT : XT_PANDA_URI
+    CLASS = (char*)"Panda::${ my $a = $type; $a =~ s/\s*\*//; \$a }";
+
+XT_PANDA_URI_STRICT_AUTO : XT_PANDA_URI
+    SV* CLASS = XSURI::get_perl_class($var);
+
+######################################################################
+INPUT
+    
+XT_PANDA_XSURI : T_OEXT(basetype=XSURI*)
+
+XT_PANDA_URI : XT_PANDA_XSURI(nocast=1)
+    $var = dynamic_cast<$type>(((XSURI*)$var)->uri);
+
+XT_PANDA_URI_STRICT : XT_PANDA_URI

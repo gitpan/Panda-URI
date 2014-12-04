@@ -3,7 +3,7 @@ use parent 'Panda::Export';
 use 5.012;
 use Panda::Lib;
 
-our $VERSION = '0.1.0';
+our $VERSION = '0.1.1';
 
 =head1 NAME
 
@@ -26,6 +26,7 @@ overload->import(
         return ($_[0]->to_string eq $_[1]) unless ref $_[1];
         return $_[0]->equals($_[1]);
     },
+    'bool'   => \&to_bool,
     fallback => 1,
 );
 
@@ -306,6 +307,20 @@ Returns uri, relative to current scheme and location, for example:
 =head4 to_string(), as_string(), '""'
 
 Returns the whole uri as string.
+
+=head4 to_bool(), 'bool'
+
+Returns true if url is not empty. Note that if an uri object has only user_info or only port set, it is empty as it is not printable.
+
+Actually
+
+    if ($uri) {} # the same as if ($uri->to_bool())
+    
+is the same as
+
+    if ($uri->to_string) {}
+    
+but runs faster.
 
 =head4 secure()
 

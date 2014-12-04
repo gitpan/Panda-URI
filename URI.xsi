@@ -180,5 +180,10 @@ void URI::path_segments (...) {
     EXTEND(SP, list.size());
     for (std::vector<string>::const_iterator it = list.begin(); it != list.end(); ++it) mPUSHp(it->data(), it->length());
 }
+
+bool URI::to_bool (...) {
+    RETVAL = THIS->scheme().length() || THIS->host().length() || THIS->path().length() || THIS->query_string().length() ||
+             THIS->fragment().length();
+}
     
 void XSURI::DESTROY ()

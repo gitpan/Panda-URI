@@ -169,6 +169,7 @@ void URI::parse (const string& uristr) {
 
     for (; i < len; ++i) {
         if (parseinfo[state][(uchar)p[i]].seen_state == STATE_NONE) continue;
+        if (unlikely(p[i] == 0)) break; // null-byte in uri should be treaten as the end of uri
 
         if (state == STATE_SCHEME && p[i] == ':') {                     // custom processing
             if (len > i + 2 && p[i+1] == '/' && p[i+2] == '/') {        // 'scheme://netloc' case

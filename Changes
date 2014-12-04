@@ -1,2 +1,7 @@
+0.1.1    04.12.2014
+           - bugfix: corrupted url strings (with null bytes) might cause core dumps.
+             now null-bytes immediately stop parsing as if it was the end of the url string.
+           - added bool operator overloading, to prevent calling more expensive to_string()
+             in conditions like: if ($uri) {}
 0.1.0    26.11.2014
            - first release

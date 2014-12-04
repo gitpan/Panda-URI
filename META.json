@@ -34,7 +34,7 @@
             "ExtUtils::MakeMaker" : "6.76",
             "Panda::Install" : "v0.2.1",
             "Panda::Lib" : "v0.1.0",
-            "Panda::XS" : "v0.1.5"
+            "Panda::XS" : "v0.1.6"
          }
       },
       "runtime" : {
@@ -42,11 +42,11 @@
             "Panda::Export" : "0",
             "Panda::Install" : "v0.2.1",
             "Panda::Lib" : "v0.1.0",
-            "Panda::XS" : "v0.1.5",
+            "Panda::XS" : "v0.1.6",
             "perl" : "5.010000"
          }
       }
    },
    "release_status" : "stable",
-   "version" : "v0.1.0"
+   "version" : "v0.1.1"
 }

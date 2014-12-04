@@ -81,6 +81,11 @@ is(Panda::URI->new("http://ya.ru?p1=v1&p2=v2#myhash")->relative, '/?p1=v1&p2=v2#
 
 # equals
 
+# injection
+# null byte in uri. should NOT core dump. Stop parsing url on null byte
+test_url("http://api.odnokl\x5C\x00\x03\x06\x00\x00\x00\x00\x00\x00\x00\x23\xC3\xABlq\x1B\x00\x02",
+         'http', '', 'api.odnokl\\', 0, 80, '', '', '', 'http://api.odnokl%5C');
+
 
 sub test_url {
     my ($url, $scheme, $uinfo, $host, $expport, $port, $path, $qstr, $frag, $str) = @_;

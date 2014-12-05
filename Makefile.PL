@@ -13,5 +13,5 @@ write_makefile(
         INCLUDE  => {'src' => '/'},
         TYPEMAPS => {'typemap' => ''},
     },
-    OPTIMIZE => '-g -O2',
+    #OPTIMIZE => '-g -O2',
 );

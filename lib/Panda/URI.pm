@@ -3,7 +3,7 @@ use parent 'Panda::Export';
 use 5.012;
 use Panda::Lib;
 
-our $VERSION = '0.1.2';
+our $VERSION = '0.1.3';
 
 =head1 NAME
 

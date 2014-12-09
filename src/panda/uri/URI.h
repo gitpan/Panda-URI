@@ -143,6 +143,7 @@ public:
     void raw_query (const string& rq) {
         _qstr.clear();
         encode_uri_component(rq, _qstr, unsafe_query);
+        ok_qstr();
     }
 
     void query (const string& qstr) { query_string(qstr); }
@@ -167,13 +168,15 @@ public:
     void add_query (const Query& addquery);
 
     const string& param (const string& key) const {
+        sync_query();
         Query::const_iterator row = _query.find(key);
         return row == _query.cend() ? _empty : row->second;
     }
 
     void param (const string& key, const string& val) {
+        sync_query();
         Query::iterator row = _query.find(key);
-        if (row != _query.end()) row->second.assign(val);
+        if (row != _query.end()) row->second.assign(val); 
         else _query.insert(key, val);
     }
 

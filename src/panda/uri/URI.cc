@@ -285,7 +285,7 @@ void URI::parse_query () const {
     int len = _qstr.length();
     _query.clear();
 
-    for (int i = 0; i <= len; ++i) {
+    if (len) for (int i = 0; i <= len; ++i) {
         char c = (i == len) ? delim : str[i];
         if (c == '=' && mode == PARSE_MODE_KEY) {
             key_end = i;

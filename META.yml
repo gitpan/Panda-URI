@@ -30,4 +30,4 @@ requires:
   Panda::Lib: v0.1.0
   Panda::XS: v0.1.6
   perl: '5.010000'
-version: v0.1.2
+version: v0.1.3

@@ -82,4 +82,10 @@ $uri = new Panda::URI("https://ya.ru/my/path?a=b;e=f;c=d%20e", PARAM_DELIM_SEMIC
 cmp_deeply($uri->query, {a => 'b', e => 'f', c => 'd e'});
 like($uri->query_string, '/[^;]+;[^;]+;[^;]+/');
 
+# bug test (no sync query for param())
+$uri = Panda::URI->new("https://graph.facebook.com/v2.2?fields=id%2Cfirst_name%2Clast_name%2Cname%2Cgender%2Cbirthday%2Clink&ids=me&include_headers=false");
+$uri->query_string('');
+$uri->param('batch', 123);
+is($uri, "https://graph.facebook.com/v2.2?batch=123");
+
 done_testing();
